@@ -1,21 +1,21 @@
 const mongoose = require('mongoose');
 
 const accountscheme=new mongoose.mongoose.Schema({
-    Cardno:{
+    cardNo:{
         type:Number,
         required:true
     },
-    Username:{
+    username:{
         type:String,
         required:true
     },
-    Pin:{
+    enteredPrice:{
         type:Number,
         required:true
 
     },
-    Expiry:{
-        type:Number,
+    expiry:{
+        type:String,
         required:true
     }
 

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState ,useEffect } from 'react';
 import Analytics from './Homee/DashBoard/analytics';
 import UploadBook from './UploadBook';
 import UploadBlog from './UploadBlog';
@@ -6,8 +6,19 @@ import { AppContext } from '../context/appContext';
 import altafbhai from "../assets/bhai.png"
 const AdminDashboard = () => {
   const [activeComponent, setActiveComponent] = useState(null);
-  const {isAdmin,setAdmin}=useContext(AppContext)
+  const [isAdmin,setAdmin]=useState(null)
 
+  useEffect(() => {
+    const userInfo = JSON.parse(localStorage.getItem('userinfo'));
+    if (userInfo && userInfo.isAdmin) {
+      setAdmin(true);
+    }
+    else{
+      setAdmin(null)
+    }
+    
+  }, []);
+  
   const handleUploadBlog = () => {
     setActiveComponent('uploadBlog');
   };

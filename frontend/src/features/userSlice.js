@@ -28,6 +28,7 @@ export const userSlice = createSlice({
     },
 });
 export const logout = () => (dispatch) => {
+    
     console.log("Logging out...");
     // Clear user information from local storage
     localStorage.removeItem("userinfo");

@@ -83,51 +83,44 @@ router.route("/book/:id").get(async (req, res) => {
        res.status(500).send(error);
    }
 });
-router.route("/dash/orders").get(async(req,res)=>{
-
-  try {
-      
-      const orders=await Order.find();
-      res.status(202).json({data:orders})
-
-
-  } catch (error) {
-      res.status(500).send(error);
-      
-  }
-})
-.post(async(req,res)=>{
-
-  try {
-      const neworder=new Order(req.body)
-      const savedorder=await neworder.save()
-      res.status(202).json({data:savedorder})
-
-
-  } catch (error) {
-      res.send(error)
-  }
-})
-
-router.route('/dash/paymentadd').post(async(req,res)=>{
-  try {
-      const num=req.body.Cardno
-      const search=await Accounts.findOne({"Cardno":num})
-      
-      if(search){
-          res.send("card already exists")
-      }else{
-
-          const newaccount=new Accounts(req.body)
-          const saved=await newaccount.save()
-          res.status(202).json({data:saved})
-      }
-      
-
-  } catch (error) {
-      res.send(error)
-  }
-})
+router.route('/accounts').post( async (req, res) => {
+    try {
+      const { cardNo, username, enteredPrice, expiry } = req.body;
+  
+      const account = new Accounts({
+        cardNo,
+        username,
+        enteredPrice,
+        expiry,
+      });
+  
+      await account.save();
+  
+      res.status(201).json({ message: 'Account created successfully' });
+    } catch (error) {
+      console.error('Error creating account:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
+router.route('/orders').post(async (req, res) => {
+    try {
+      const { bookTitle, orderId, enteredPrice } = req.body;
+  
+      const order = new Order({
+        bookTitle,
+        orderId,
+        enteredPrice,
+      });
+  
+      await order.save();
+  
+      res.status(201).json({ message: 'Order created successfully' });
+    } catch (error) {
+      console.error('Error creating order:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
 /*const storage = multer.diskStorage({
   destination: function(req, file, cb) {
     cb(null, './UploadedBooks'); 

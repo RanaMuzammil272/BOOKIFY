@@ -6,6 +6,7 @@ const UploadBook = () => {
   const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
   const [cover, setCover] = useState('');
+  const [price, setPrice] = useState('');
   const [file, setFile] = useState(null);
 
   const handleFileChange = (e) => {
@@ -20,6 +21,7 @@ const UploadBook = () => {
     formdata.append('bookTitle',bookTitle);
     formdata.append('authorName',authorName);
     formdata.append('category',category);
+    formdata.append('price',price);
     formdata.append('description',description);
     formdata.append('cover',cover);
     formdata.append('file',file);
@@ -51,6 +53,7 @@ const UploadBook = () => {
     setBookTitle('');
     setAuthorName('');
     setCategory('');
+    setPrice('');
     setDescription('');
     setCover('');
     setFile(null);
@@ -89,6 +92,16 @@ const UploadBook = () => {
               id="category"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+            />
+          </div>
+          <div>
+            <label htmlFor="category" className="block font-medium text-gray-700">Price</label>
+            <input
+              type="text"
+              id="price"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
               className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
             />
           </div>

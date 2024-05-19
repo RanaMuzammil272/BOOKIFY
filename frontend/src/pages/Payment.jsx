@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
-
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 const Payment = () => {
+  const location = useLocation();
+  const { price, orderId, bookTitle } = location.state;
   const [paymentDetails, setPaymentDetails] = useState({
     cardNo: '',
     username: '',
     pin: '',
-    expiry: ''
+    expiry: '',
+    enteredPrice: ''
   });
 
   const [formErrors, setFormErrors] = useState({});
@@ -16,14 +20,40 @@ const Payment = () => {
       ...prevState,
       [name]: value
     }));
+    setFormErrors(prevErrors => ({
+      ...prevErrors,
+      [name]: undefined
+    }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     const errors = validateForm();
     if (Object.keys(errors).length === 0) {
-      // Add your payment processing logic here
-      console.log('Submitted payment details:', paymentDetails);
+      if (parseFloat(paymentDetails.enteredPrice) === price) {
+        try {
+          
+          await axios.post('http://localhost:5000/api/books/accounts', {
+            cardNo: paymentDetails.cardNo,
+            username: paymentDetails.username,
+            enteredPrice: paymentDetails.enteredPrice,
+            expiry: paymentDetails.expiry
+          });
+  
+          
+          await axios.post('http://localhost:5000/api/books/orders', {
+            bookTitle,
+            orderId,
+            enteredPrice: paymentDetails.enteredPrice
+          });
+  
+          console.log('Payment details submitted successfully');
+        } catch (error) {
+          console.error('Error submitting payment details:', error);
+        }
+      } else {
+        setFormErrors({ enteredPrice: 'Entered price does not match the payment price' });
+      }
     } else {
       setFormErrors(errors);
     }
@@ -125,6 +155,21 @@ const Payment = () => {
               placeholder="MM/YY"
             />
             {formErrors.expiry && <span className="text-red-500 text-sm">{formErrors.expiry}</span>}
+          </div>
+          <div className="mb-4">
+            <label htmlFor="enteredPrice" className="block text-gray-700 font-semibold mb-1">
+              Price : {price}
+            </label>
+            <input
+              type="text"
+              id="enteredPrice"
+              name="enteredPrice"
+              value={paymentDetails.enteredPrice}
+              onChange={handleChange}
+              className={`border rounded-md p-2 w-full ${formErrors.enteredPrice ? 'border-red-500' : 'border-gray-400'}`}
+              placeholder="Enter the price"
+            />
+            {formErrors.enteredPrice && <span className="text-red-500 text-sm">{formErrors.enteredPrice}</span>}
           </div>
           <button
             type="submit"

@@ -16,7 +16,6 @@ import {
 } from "@material-tailwind/react";
 
 export default function TempLogin({ toggleForm }) {
-  const { isAdmin, setAdmin } = useContext(AppContext)
   const [loginUser] = useLoginUserMutation();
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
@@ -38,7 +37,6 @@ export default function TempLogin({ toggleForm }) {
         console.log(data);
         if (data.isAdmin) {
           console.log("User is an admin");
-          setAdmin(data);
           navigate("/Dashboard");
         } else {
           console.log("User is not an admin");

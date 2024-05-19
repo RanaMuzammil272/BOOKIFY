@@ -73,6 +73,7 @@ app.post('/api/books/upload',upload.single('file'), async (req, res) => {
       authorName: req.body.authorName,
       imageURL: req.body.cover,
       category: req.body.category,
+      price:req.body.price,
       bookDescription: req.body.description,
       bookPDF: req.file.filename 
     });

@@ -23,6 +23,11 @@ category: {
     required: true,
     
 },
+price: {
+    type: Number,
+    required: true,
+    
+},
 bookDescription: {
     type: String,
     required: true,

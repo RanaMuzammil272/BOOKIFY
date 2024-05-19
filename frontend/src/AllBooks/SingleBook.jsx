@@ -11,7 +11,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 
 const SingleBook = () => {
   const [pdfFile, setPdfFile] = useState(null);
-  const { bookTitle, imageURL, authorName, category, bookDescription, bookPDF } = useLoaderData();
+  const { _id, bookTitle, imageURL, authorName, category, bookDescription, bookPDF ,price} = useLoaderData();
   const navigate = useNavigate(); // React Router's history object
 
   const downloadPDF = (url) => {
@@ -24,7 +24,12 @@ const SingleBook = () => {
 
   // Function to handle navigation to the payment component
   const goToPayment = () => {
-    navigate('/payment'); // Redirect to the payment route
+    const paymentProps = {
+      price: price,
+      orderId: _id, 
+      bookTitle: bookTitle
+    };
+    navigate('/payment',{ state: paymentProps }); // Redirect to the payment route
   };
 
   return (
@@ -38,7 +43,7 @@ const SingleBook = () => {
           <p className="text-lg text-gray-700 mb-4"><strong>Author:</strong> {authorName}</p>
           <p className="text-lg text-gray-700 mb-4"><strong>Genre:</strong> {category}</p>
           <p className="text-lg text-gray-700 mb-4">{bookDescription}</p>
-
+          <p className="text-xl text-gray-800 font-semibold mb-4">Price: {price} pkr </p>
           <div className='my-10'>
             <button
               type="button"

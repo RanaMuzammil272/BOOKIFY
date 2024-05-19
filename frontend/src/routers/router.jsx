@@ -16,6 +16,7 @@ import AdminDashboard from "../pages/AdminDashboard"
 import Payment from "../pages/Payment"
 import BlogList from "../pages/BlogList";
 import BlogPage from "../pages/BlogPage";
+import DisplayPayments from "../pages/DisplayPayments";
   const router = createBrowserRouter([
     {
       path: "/",
@@ -55,6 +56,10 @@ import BlogPage from "../pages/BlogPage";
         {
           path: "/uploadBook",
           element: <UploadBook/>
+        },
+        {
+          path: "/DisplayPayments",
+          element: <DisplayPayments/>
         },
         {
           path: "/uploadBlog",

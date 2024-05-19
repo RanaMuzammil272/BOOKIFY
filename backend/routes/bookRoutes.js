@@ -121,6 +121,24 @@ router.route('/orders').post(async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     }
   });
+  router.route('/orders').get(async (req, res) => {
+    try {
+      const orders = await Order.find();
+      res.status(200).json(orders);
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  router.route('/accounts').get(async (req, res) => {
+    try {
+      const accounts = await Accounts.find();
+      res.status(200).json(accounts);
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
 /*const storage = multer.diskStorage({
   destination: function(req, file, cb) {
     cb(null, './UploadedBooks'); 

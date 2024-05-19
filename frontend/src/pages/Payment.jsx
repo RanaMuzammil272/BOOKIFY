@@ -48,6 +48,13 @@ const Payment = () => {
           });
   
           console.log('Payment details submitted successfully');
+          setPaymentDetails({
+            cardNo: '',
+            username: '',
+            pin: '',
+            expiry: '',
+            enteredPrice: ''
+          });
         } catch (error) {
           console.error('Error submitting payment details:', error);
         }

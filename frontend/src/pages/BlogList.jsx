@@ -4,18 +4,41 @@ import axios from 'axios';
 
 function BlogList() {
   const [blogs, setBlogs] = useState([]);
+  const [imageUrls, setImageUrls] = useState([]);
 
   useEffect(() => {
     axios
       .get('http://localhost:5000/api/blogs/')
       .then((response) => {
-        console.log(response.data);
         setBlogs(response.data);
+        fetchUnsplashImages(response.data);
       })
       .catch((error) => {
         console.error('Error fetching blogs:', error);
       });
   }, []);
+
+  const fetchUnsplashImages = async (blogData) => {
+    try {
+      const imageUrls = await Promise.all(
+        blogData.map(async (blog) => {
+          const response = await axios.get(`https://api.unsplash.com/photos/random`, {
+            params: {
+              query: blog.Title,
+              client_id: 'yt46gl5IHzN36Z5R-kSJfapK_DqC6poexU0b8nrwnJQ',
+              orientation: 'landscape',
+              w: 800,
+              h: 600,
+            },
+          });cd
+          return response.data.urls.regular;
+        })
+      );
+      setImageUrls(imageUrls);
+    } catch (error) {
+      console.error('Error fetching Unsplash images:', error);
+    }
+  };
 
   return (
     <div className="mt-10 container mx-auto py-12">
@@ -32,7 +55,7 @@ function BlogList() {
                 }`}
               >
                 <img
-                  src={`https://source.unsplash.com/random/800x600?${index}`}
+                  src={imageUrls[index] || `https://source.unsplash.com/random/800x600?${blog.Title}`}
                   alt={blog.Title}
                   className="w-full h-48 md:h-64 object-cover"
                 />

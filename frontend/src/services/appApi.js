@@ -9,7 +9,7 @@ const appApi = createApi({
     }),
 
     endpoints: (builder) => ({
-        // creating the user
+        
         signupUser: builder.mutation({
             query: (user) => ({
                 url: "/api/user/",
@@ -18,7 +18,7 @@ const appApi = createApi({
             }),
         }),
 
-        // login
+        
         loginUser: builder.mutation({
             query: (user) => ({
                 url: "/api/user/login",
@@ -27,7 +27,7 @@ const appApi = createApi({
             }),
         }),
 
-        // logout
+       
 
         logoutUser: builder.mutation({
             query: (payload) => ({

@@ -2,7 +2,7 @@ import React, { useContext, useState ,useEffect } from 'react';
 import Analytics from './Homee/DashBoard/analytics';
 import UploadBook from './UploadBook';
 import UploadBlog from './UploadBlog';
-import altafbhai from "../assets/bhai.png"
+import altafbhai from "../assets/userimg.png"
 import DisplayPayments from './DisplayPayments';
 import axios from 'axios';
 const AdminDashboard = () => {
@@ -63,60 +63,49 @@ const AdminDashboard = () => {
       case null:
         return (
           <>
-          <div className="relative mt-24 bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl shadow-lg overflow-hidden">
-          <div className="flex items-center justify-between p-6">
-            <div>
-              <h2 className="text-3xl font-bold text-white">Rana Muzammil</h2>
-              <p className="text-gray-400 font-medium mt-1">Scrum Master</p>
-              <p className="text-gray-400 font-medium mt-1">rana.muzammil@bookify.com</p>
-            </div>
-            <div className="relative">
-              <img
-                src={altafbhai}
-                alt="Admin"
-                className="w-24 h-24 rounded-full border-4 border-white"
-              />
-              <div className="absolute bottom-0 right-0 bg-green-500 rounded-full p-1">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 text-white"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="p-6">
-  <h3 className="text-xl font-bold mb-4">Order History</h3>
-  <table className="min-w-full">
-    <thead>
-      <tr className="bg-gray-900 text-white">
-        <th className="py-2 px-4 border-b">Book Title</th>
-        <th className="py-2 px-4 border-b">Order ID</th>
-        <th className="py-2 px-4 border-b">Price</th>
-        <th className="py-2 px-4 border-b">Order Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      {orders.map((order, index) => (
-        
-        <tr key={order._id} className={index % 2 === 0 ? 'bg-gray-800' : 'bg-gray-700'}>
-          <td className="py-2 px-4 border-b text-white">{order.bookTitle}</td>
-          <td className="py-2 px-4 border-b text-white">{order.orderId}</td>
-          <td className="py-2 px-4 border-b text-white">{order.enteredPrice}</td>
-          <td className="py-2 px-4 border-b text-white">{new Date(order.createdAt).toLocaleDateString()}</td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
+         <div className="ml-1 container mx-auto mt-20 bg-gray-100 rounded-lg shadow-lg overflow-hidden">
+  <div className="flex items-center justify-between bg-gradient-to-r from-purple-600 to-indigo-600 p-6">
+    <div className="flex items-center">
+      <img
+        src={altafbhai}
+        alt="Admin"
+        className="w-16 h-16 rounded-full border-4 border-white mr-4"
+      />
+      <div>
+        <h2 className="text-xl font-semibold text-white">Rana Muzammil</h2>
+        <p className="text-sm text-gray-200">Scrum Master</p>
+        <p className="text-sm text-gray-200">rana.muzammil@bookify.com</p>
+      </div>
+    </div>
+   
+  </div>
+  <div className="p-6">
+    <h3 className="text-lg font-semibold mb-4">Order History</h3>
+    <div className="overflow-x-auto">
+      <table className="min-w-full">
+        <thead>
+          <tr className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
+            <th className="py-3 px-4 border-b">Book Title</th>
+            <th className="py-3 px-4 border-b">Order ID</th>
+            <th className="py-3 px-4 border-b">Price</th>
+            <th className="py-3 px-4 border-b">Order Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {orders.map((order, index) => (
+            <tr key={order._id} className={index % 2 === 0 ? 'bg-gray-200' : 'bg-gray-100'}>
+              <td className="py-3 px-4 border-b">{order.bookTitle}</td>
+              <td className="py-3 px-4 border-b">{order.orderId}</td>
+              <td className="py-3 px-4 border-b">{order.enteredPrice}</td>
+              <td className="py-3 px-4 border-b">{new Date(order.createdAt).toLocaleDateString()}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
+
         </>
         );
       default:
@@ -126,8 +115,8 @@ const AdminDashboard = () => {
 
   return (
     isAdmin ? (
-      <div className="flex h-screen">
-        <div className="bg-gray-900 w-2/12 flex flex-col">
+      <div className="flex h-screen ">
+        <div className="bg-gray-900 w-2/12 flex flex-col rounded-lg">
           <div className="py-4 px-6 text-white text-lg mt-20 font-bold"></div>
           <ul className="flex-grow">
             <li className="py-2">

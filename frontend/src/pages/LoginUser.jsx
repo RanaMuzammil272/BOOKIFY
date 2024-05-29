@@ -5,6 +5,7 @@ import Loader from '../components/loader';
 import { useSignupUserMutation, useLoginUserMutation } from "../services/appApi";
 import { AppContext } from '../context/appContext';
 import { Link, useNavigate } from "react-router-dom";
+import twitter from "../assets/twitter.png"
 
 import bookimg from "../assets/login_page_img.jpg"
 import {
@@ -108,6 +109,7 @@ export default function TempLogin({ toggleForm }) {
                 </Typography>
               }
               containerProps={{ className: "-ml-2.5" }}
+              defaultChecked
             />
             <Button className="mt-6" fullWidth onClick={submithandler}>
               Sign In
@@ -129,6 +131,7 @@ export default function TempLogin({ toggleForm }) {
                   </Typography>
                 }
                 containerProps={{ className: "-ml-2.5" }}
+                defaultChecked
               />
               <Typography variant="small" className="font-medium text-gray-900">
                 <a href="#">
@@ -154,7 +157,7 @@ export default function TempLogin({ toggleForm }) {
                 <span>Sign in With Google</span>
               </Button>
               <Button size="lg" color="white" className="flex items-center gap-2 justify-center shadow-md" fullWidth>
-                <img src="/img/twitter-logo.svg" height={24} width={24} alt="" />
+                <img src={twitter} height={24} width={24} alt="" />
                 <span>Sign in With Twitter</span>
               </Button>
             </div>

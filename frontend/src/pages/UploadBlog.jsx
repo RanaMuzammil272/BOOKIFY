@@ -41,7 +41,7 @@ const UploadBlog = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center h-screen bg-gradient-to-r from-blue-gray-300 to-gray-300">
       <div className="bg-white p-8 rounded-lg shadow-md w-full sm:w-96">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>

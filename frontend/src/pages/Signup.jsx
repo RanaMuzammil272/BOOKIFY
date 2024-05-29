@@ -3,7 +3,9 @@ import axios from 'axios';
 import ErrorMessage from '../components/errormessage';
 import Loader from '../components/loader';
 import { useSignupUserMutation , useLoginUserMutation } from "../services/appApi";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import twitter from "../assets/twitter.png"
+import { useNavigate } from 'react-router-dom';
 import bookimg from "../assets/login_page_img.jpg"
 import {
   Card,
@@ -20,6 +22,7 @@ export default function SignupUser({ toggleForm }) {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const [signupUser, { isLoading, Error }] = useSignupUserMutation();
+    const navigate=useNavigate();
     const submitHandler = async (e) => {
         e.preventDefault();
         setError(null);
@@ -37,6 +40,7 @@ export default function SignupUser({ toggleForm }) {
                  
                   setLoading(false);  
                   localStorage.setItem('userinfo',JSON.stringify(data));
+                  navigate("/login");
               }
           });
 
@@ -118,6 +122,7 @@ export default function SignupUser({ toggleForm }) {
         </Typography>
       }
       containerProps={{ className: "-ml-2.5" }}
+      defaultChecked
     />
     <Button className="mt-6" fullWidth  onClick={submitHandler}>
       Register Now
@@ -141,7 +146,7 @@ export default function SignupUser({ toggleForm }) {
         <span>Sign in With Google</span>
       </Button>
       <Button size="lg" color="white" className="flex items-center gap-2 justify-center shadow-md" fullWidth>
-        <img src="/img/twitter-logo.svg" height={24} width={24} alt="" />
+        <img src={twitter} height={24} width={24} alt="" />
         <span>Sign in With Twitter</span>
       </Button>
     </div>

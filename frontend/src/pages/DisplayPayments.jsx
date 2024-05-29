@@ -18,29 +18,22 @@ const DisplayPayments = () => {
   };
 
   return (
-    <div className="mt-20 container mx-auto px-4 py-8">
+    <div className="container mx-auto mt-12 bg-gray-100 rounded-lg shadow-lg overflow-hidden">
+  <div className="p-8">
     <h1 className="text-3xl font-bold mb-4">Payment Information</h1>
     <div className="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 overflow-hidden rounded-lg shadow-lg">
       <table className="min-w-full bg-white">
         <thead>
-          <tr>
-            <th className="py-3 px-6 bg-gray-100 text-gray-700 font-bold uppercase border-b border-gray-300">
-              Card Number
-            </th>
-            <th className="py-3 px-6 bg-gray-100 text-gray-700 font-bold uppercase border-b border-gray-300">
-              Username
-            </th>
-            <th className="py-3 px-6 bg-gray-100 text-gray-700 font-bold uppercase border-b border-gray-300">
-              Price
-            </th>
-            <th className="py-3 px-6 bg-gray-100 text-gray-700 font-bold uppercase border-b border-gray-300">
-              Expiry
-            </th>
+          <tr className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
+            <th className="py-3 px-6 font-semibold uppercase border-b border-gray-300">Card Number</th>
+            <th className="py-3 px-6 font-semibold uppercase border-b border-gray-300">Username</th>
+            <th className="py-3 px-6 font-semibold uppercase border-b border-gray-300">Price</th>
+            <th className="py-3 px-6 font-semibold uppercase border-b border-gray-300">Expiry</th>
           </tr>
         </thead>
         <tbody>
-          {payments.map((payment) => (
-            <tr key={payment._id} className="bg-white">
+          {payments.map((payment, index) => (
+            <tr key={payment._id} className={index % 2 === 0 ? 'bg-gray-200' : 'bg-gray-100'}>
               <td className="py-4 px-6 border-b border-gray-300">{payment.cardNo}</td>
               <td className="py-4 px-6 border-b border-gray-300">{payment.username}</td>
               <td className="py-4 px-6 border-b border-gray-300">{payment.enteredPrice}</td>
@@ -51,6 +44,8 @@ const DisplayPayments = () => {
       </table>
     </div>
   </div>
+</div>
+
   );
 };
 

@@ -12,7 +12,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 const SingleBook = () => {
   const [pdfFile, setPdfFile] = useState(null);
   const { _id, bookTitle, imageURL, authorName, category, bookDescription, bookPDF ,price} = useLoaderData();
-  const navigate = useNavigate(); // React Router's history object
+  const navigate = useNavigate(); 
 
   const downloadPDF = (url) => {
     window.open(`http://localhost:5000/UploadedBooks/${url}`, "_blank","noreferrer");

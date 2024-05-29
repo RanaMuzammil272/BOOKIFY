@@ -60,8 +60,8 @@ const UploadBook = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen mt-20">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full sm:w-96">
+    <div className="bg-gradient-to-r from-blue-gray-300 to-gray-300 flex justify-center items-center min-h-screen   ">
+      <div className="bg-white p-8 rounded-lg shadow-md w-full sm:w-96 mt-20">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="bookTitle" className="block font-medium text-gray-700">Book Title</label>

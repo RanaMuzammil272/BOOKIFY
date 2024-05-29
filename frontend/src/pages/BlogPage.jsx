@@ -5,6 +5,7 @@ import axios from 'axios';
 function BlogPage() {
   const [blog, setBlog] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [imageUrl, setImageUrl] = useState('');
   const { id } = useParams();
 
   useEffect(() => {
@@ -13,6 +14,7 @@ function BlogPage() {
       .get(`http://localhost:5000/api/blogs/${id}`)
       .then((response) => {
         setBlog(response.data);
+        fetchUnsplashImage(response.data.Title);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -20,6 +22,23 @@ function BlogPage() {
         setIsLoading(false);
       });
   }, [id]);
+
+  const fetchUnsplashImage = async (searchTerm) => {
+    try {
+      const response = await axios.get(`https://api.unsplash.com/photos/random/`, {
+        params: {
+          query: searchTerm,
+          client_id: 'yt46gl5IHzN36Z5R-kSJfapK_DqC6poexU0b8nrwnJQ',
+          orientation: 'landscape',
+          w: 1200,
+          h: 600,
+        },
+      });
+      setImageUrl(response.data.urls.regular);
+    } catch (error) {
+      console.error('Error fetching Unsplash image:', error);
+    }
+  };
 
   if (isLoading) {
     return <div className="flex items-center justify-center h-screen">Loading...</div>;
@@ -33,7 +52,7 @@ function BlogPage() {
     <div className="mt-10 container mx-auto py-12">
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg">
         <img
-          src={`https://source.unsplash.com/random/1200x600?${blog.Title}`}
+          src={imageUrl}
           alt={blog.Title}
           className="w-full h-96 object-cover rounded-t-lg"
         />
@@ -42,7 +61,7 @@ function BlogPage() {
           <div className="flex items-center mb-6">
             <div>
               <p className="text-gray-800 font-bold">{blog.authorName}</p>
-              <p className="text-gray-600">{blog.authorBio}</p>
+              
             </div>
           </div>
           <div className="prose max-w-none mb-6">{blog.description}</div>

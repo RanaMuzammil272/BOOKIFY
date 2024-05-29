@@ -44,7 +44,7 @@ const MyFooter = () => {
           </div>
         </div>
         <div className="w-full bg-gray-700 px-4 py-6 sm:flex sm:items-center sm:justify-between">
-          <Footer.Copyright href="#" by="Flowbite™" year={2022} className="text-gray-100" /> {/* Changed text color to light white */}
+          <Footer.Copyright href="#" by="Bookify" year={2024} className="text-gray-100" /> {/* Changed text color to light white */}
           <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
   {/* Wrap each icon with an anchor tag */}
   <a href="https://www.facebook.com/yourpage" target="_blank" rel="noopener noreferrer">
